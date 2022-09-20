@@ -1,0 +1,83 @@
+.include__list {
+    background-image: url(spritesheet.png);
+    background-repeat: no-repeat;
+    display: block;
+}
+
+.include__list-img01 {
+    width: 30px;
+    height: 30px;
+    background-position: -2px -2px;
+}
+
+.include__list-img02 {
+    width: 32px;
+    height: 31px;
+    background-position: -36px -2px;
+}
+
+.include__list-img03 {
+    width: 32px;
+    height: 26px;
+    background-position: -72px -2px;
+}
+
+.include__list-img04 {
+    width: 30px;
+    height: 32px;
+    background-position: -72px -32px;
+}
+
+.include__list-img05 {
+    width: 26px;
+    height: 32px;
+    background-position: -2px -68px;
+}
+
+.include__list-img06 {
+    width: 32px;
+    height: 31px;
+    background-position: -32px -68px;
+}
+
+.include__list-img07 {
+    width: 30px;
+    height: 28px;
+    background-position: -68px -68px;
+}
+
+.include__list-img08 {
+    width: 32px;
+    height: 30px;
+    background-position: -108px -2px;
+}
+
+.include__list-img09 {
+    width: 26px;
+    height: 25px;
+    background-position: -2px -36px;
+}
+
+.include__list-img10 {
+    width: 29px;
+    height: 32px;
+    background-position: -106px -36px;
+}
+
+.include__list-img11 {
+    width: 32px;
+    height: 25px;
+    background-position: -102px -72px;
+}
+
+.include__list-img12 {
+    width: 32px;
+    height: 30px;
+    background-position: -68px -101px;
+}
+
+.include__list-img13 {
+    width: 32px;
+    height: 26px;
+    background-position: -104px -101px;
+}
