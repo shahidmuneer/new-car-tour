@@ -1,0 +1,152 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon0a0e.eot?5x7u1j');
+  src:  url('fonts/icomoon0a0e.eot?5x7u1j#iefix') format('embedded-opentype'),
+    url('fonts/icomoon0a0e.ttf?5x7u1j') format('truetype'),
+    url('fonts/icomoon0a0e.woff?5x7u1j') format('woff'),
+    url('fonts/icomoon0a0e.svg?5x7u1j#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-menu:before {
+  content: "\e120";
+}
+.icon-check:before {
+  content: "\e5ca";
+}
+.icon-combo:before {
+  content: "\e901";
+}
+.icon-chevron-thin-left:before {
+  content: "\e902";
+}
+.icon-calendar:before {
+  content: "\e903";
+}
+.icon-chevron-thin-right:before {
+  content: "\e904";
+}
+.icon-instagram-with-circle:before {
+  content: "\e905";
+}
+.icon-instagram:before {
+  content: "\e906";
+}
+.icon-laps:before {
+  content: "\e907";
+}
+.icon-time:before {
+  content: "\e908";
+}
+.icon-fleche:before {
+  content: "\e909";
+}
+.icon-localization:before {
+  content: "\e90a";
+}
+.icon-customersrvice:before {
+  content: "\e90b";
+}
+.icon-instructors:before {
+  content: "\e90c";
+}
+.icon-secured:before {
+  content: "\e90d";
+}
+.icon-employees:before {
+  content: "\e90e";
+}
+.icon-racetracks:before {
+  content: "\e90f";
+}
+.icon-satsifiedcustomers:before {
+  content: "\e910";
+}
+.icon-supercars:before {
+  content: "\e911";
+}
+.icon-customize:before {
+  content: "\e912";
+}
+.icon-gift:before {
+  content: "\e913";
+}
+.icon-groupevents:before {
+  content: "\e914";
+}
+.icon-racingschool:before {
+  content: "\e915";
+}
+.icon-ridealong:before {
+  content: "\e916";
+}
+.icon-vip:before {
+  content: "\e917";
+}
+.icon-engine:before {
+  content: "\e918";
+}
+.icon-price:before {
+  content: "\e919";
+}
+.icon-speed:before {
+  content: "\e91a";
+}
+.icon-backtotop:before {
+  content: "\e91b";
+}
+.icon-search:before {
+  content: "\e91c";
+}
+.icon-cart:before {
+  content: "\e91d";
+}
+.icon-calendar2:before {
+  content: "\e91e";
+}
+.icon-volume:before {
+  content: "\e91f";
+}
+.icon-mute:before {
+  content: "\e920";
+}
+.icon-facebook2:before {
+  content: "\ea90";
+}
+.icon-twitter2:before {
+  content: "\ea96";
+}
+.icon-twitter:before {
+  content: "\f099";
+}
+.icon-facebook:before {
+  content: "\f09a";
+}
+.icon-angle-right:before {
+  content: "\f105";
+}
+.icon-angle-down:before {
+  content: "\f107";
+}
+.icon-youtube:before {
+  content: "\f167";
+}
+.icon-gokart:before {
+  content: "\e921";
+}

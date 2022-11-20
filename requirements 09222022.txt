@@ -1,0 +1,11 @@
+track day etc with background section > create inward image button for track days, tour days etc. 
+
+Change the footer emojis
+
+add content to header menu 
+
+Our Satisfied Customers > Our Satisfied Clients 
+
+Update margins between clients cards. 
+
+update banner size 

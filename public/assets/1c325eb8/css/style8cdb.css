@@ -1,0 +1,53 @@
+/* CSS Images Sprites */
+#icon-facebookm, #icon-twitter, #icon-flickr, #icon-youtube {
+    background-image: url('../images/icon-social.png');
+    background-repeat: no-repeat;
+    width: 60px !important;
+    height: 40px;
+    display: block;
+}
+#icon-facebookm {
+    background-position: 0px top;
+}
+#icon-twitter {
+    background-position: 0px -40px;
+}
+#icon-flickr {
+    background-position: 0px -79px;
+}
+#icon-youtube {
+    background-position: 0px -118px;
+}
+
+.blog-social-content-twitter {
+    overflow: hidden;
+    margin-top: 0px;
+    height: 240px;
+}
+
+#blog-social-facebook {
+    background: transparent url(../images/icon-box-social.png) no-repeat;
+    background-position: 0px -5px;
+    height: 100px;
+    margin-top: 25px;
+    padding: 10px 0px 0px 0px;
+}
+
+#blog-social-instagram {
+    background: transparent url(../images/icon-box-social.png) no-repeat;
+    background-position: 0px -130px;
+    height: 100px;
+    margin-top: 15px;
+    padding: 20px 0px 0px 0px;
+}
+
+#blog-social-twitter {
+    background: transparent url(../images/icon-box-social.png) no-repeat;
+    background-position: 0px -285px;
+    height: 100px;
+    padding: 10px 0px 0px 0px;
+}
+
+#blog-social .block-big-title {
+    text-align: right;
+}
