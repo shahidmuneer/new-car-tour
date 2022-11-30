@@ -1,6 +1,6 @@
 @extends('backend.layouts.app')
 @include('sweetalert::alert')
-@section('title', 'Cars Management')
+@section('title', 'Cars Modal Management')
 
 @section('content')
     <x-backend.card>

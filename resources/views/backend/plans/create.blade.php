@@ -5,7 +5,7 @@
 @section('title', 'Create Plans')
 
 @section('content')
-    <x-forms.post :action="route('category.store')">
+    <x-forms.post :action="route('plans.store')">
         <x-backend.card>
             <x-slot name="header">
                 Create Plans

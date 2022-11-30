@@ -7,5 +7,5 @@
 
 
 <x-livewire-tables::bs4.table.cell>
-    @include('backend.cars.includes.actions', ['model' => $row])
+    @include('backend.modal.includes.actions', ['model' => $row])
 </x-livewire-tables::bs4.table.cell>

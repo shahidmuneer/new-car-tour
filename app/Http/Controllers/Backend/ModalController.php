@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Car;
+use App\Models\Modal;
 use RealRashid\SweetAlert\Facades\Alert;
 use Illuminate\Support\Facades\Validator;
 
@@ -20,7 +21,6 @@ class ModalController extends Controller
     public function index()
     {
         return view('backend.modal.index');
-
     }
 
     /**
@@ -30,7 +30,6 @@ class ModalController extends Controller
      */
     public function create()
     {
-
         $modals=\App\Models\Modal::get();
         return view('backend.modal.create');
     }
@@ -44,18 +43,14 @@ class ModalController extends Controller
     public function store(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-   
+            'name' => 'required',
           ]);
 
-          $data= $request->all();
-          unset($data['_token']);
+        $modalcar = new Modal();
+        $modalcar->name=$request->name;
+        $modalcar->save();
 
-          $car = Car::create($data);
-
-      return redirect()->route('cars.index')->with('success', 'Car  has been added Successfully');
-
-
+      return redirect()->route('modals.index')->with('success', 'Car Modal has been added Successfully');
 
     }
 
@@ -78,9 +73,9 @@ class ModalController extends Controller
      */
     public function edit($id)
     {
-        $car = Car::findorfail($id);
-
-        return view('backend.cars.edit', compact('car'));
+        $carModal = Modal::findorfail($id);
+        $name = $carModal->name;
+        return view('backend.modal.edit', compact('name','id'));
     }
 
     /**
@@ -92,31 +87,30 @@ class ModalController extends Controller
      */
     public function update(Request $request, $id)
     {
-     
-        
         $validator = Validator::make($request->all(), [
-            'title' => 'required',
-
+            'name' => 'required',
         ]);
-        
-        $data = $request->all();
-        unset($data['_token']);
-        unset($data['_method']);
-      
 
-        $car = Car::where('id', $id)->update($data);
+        $carModal = Modal::findorfail($id);
+        $carModal->name = $request->name;
+        $carModal->save();
 
-        if ($car) {
-            $car = Car::find($id);
-            $car->addAllMediaFromTokens();
-            Alert::toast("Car Updated Successfully", 'success');
-            return redirect()->route('dailysitreps.index');
-        } else {
-            Alert::toast('Fail to update daily sitrep', 'error');
-            return redirect()->back();
-        }
+        return redirect()->route('modals.index')->with('success', 'Car  has been updated Successfully');
+
     }
-    
+
+    public function update_modals(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        $carModal = Modal::findorfail($id);
+        $carModal->name = $request->name;
+        $carModal->save();
+        return redirect()->route('modals.index')->with('success', 'Car  has been updated Successfully');
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -126,13 +120,8 @@ class ModalController extends Controller
      */
     public function destroy($id)
     {
-        $car = Car::where('id', $id)->delete();
-        if ($car) {
-            Alert::toast("cars Deleted Successfully", 'success');
-            return redirect()->route('cars.index');
-        } else {
-            Alert::toast('Fail to delete daily sitrep', 'error');
-            return redirect()->back();
-        }
+        $carModal = Modal::findorfail($id);
+        $carModal->delete();
+        return redirect()->route('modals.index')->with('success', 'Car Modal has been Deleted');
     }
 }

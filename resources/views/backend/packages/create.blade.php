@@ -5,7 +5,7 @@
 @section('title', 'Create Package')
 
 @section('content')
-    <x-forms.post :action="route('packages.store')">
+    <x-forms.post :action="route('packages.store')" enctype="multipart/form-data">
         <x-backend.card>
             <x-slot name="header">
                 Create Package
@@ -25,7 +25,7 @@
                         </div>
                     </div>
 
-                    
+
                     <div class="form-group row">
                         <label for="number_of_cars" class="col-md-2 col-form-label">Number of Cars</label>
                         <div class="col-md-10">
@@ -50,12 +50,12 @@
                     </div>
                     <!--form-group-->
 
-                    
-                    
+
+
                     <div class="form-group row">
                         <label for="availalable_times" class="col-md-2 col-form-label">Available Time Slots Per Day</label>
                         <div class="col-md-10">
-                            <input type="text" name="availalable_times" class="form-control" placeholder="Enter Available Time Slots Per Day"
+                            <input type="text" name="available_times" class="form-control" placeholder="Enter Available Time Slots Per Day"
                                 value="{{ old('availalable_times') }}" maxlength="100" required />
                         </div>
                     </div>
@@ -69,9 +69,9 @@
                     </div>
 
 
-                    
 
-                    
+
+
                     <div class="form-group row">
                         <label for="double_seat_price" class="col-md-2 col-form-label">Double Seat Price</label>
                         <div class="col-md-10">
@@ -80,16 +80,16 @@
                         </div>
                     </div>
                     <!--form-group-->
-                    
+
                     <div class="form-group row">
                         <label for="guarranttee_seat_price" class="col-md-2 col-form-label">Guarrenttee Seat Price</label>
                         <div class="col-md-10">
-                            <input type="text" name="guarranttee_seat_price" class="form-control" placeholder="Enter Guarrenttee Seat Price"
+                            <input type="text" name="guarranttee_car_price" class="form-control" placeholder="Enter Guarrenttee Seat Price"
                                 value="{{ old('guarranttee_seat_price') }}" maxlength="100" required />
                         </div>
                     </div>
                     <!--form-group-->
-                    
+
                     <div class="form-group row">
                         <label for="insurance_price" class="col-md-2 col-form-label">Insurance Price</label>
                         <div class="col-md-10">
@@ -104,47 +104,79 @@
 
                         <div class="col-md-10">
                             <div id="aboutEditor">{{ old('about') }}</div>
-                            <textarea name="about" class="form-control"  
-                            style="display:none;"
-                            id="aboutInput"
-                            placeholder="Enter About" required>{{ old('about') }}</textarea>
+                            <textarea name="about" class="form-control"
+                                      style="display:none;"
+                                      id="aboutInput"
+                            placeholder="Enter About">{{ old('about') }}</textarea>
                         </div>
                     </div>
 
 
-                    
-                
+
+
                     <div class="form-group row" style="margin-bottom:90px;">
-                        <label for="about" class="col-md-2 col-form-label ">Highlights</label>
+                        <label for="highlights" class="col-md-2 col-form-label ">Highlights</label>
 
                         <div class="col-md-10">
                             <div id="hightlightsEditor">{{ old('hightlights') }}</div>
-                            <textarea name="about" class="form-control"  
+                            <textarea name="highlights" class="form-control"
                             style="display:none;"
                             id="highlightsInput"
-                            placeholder="Enter Highlights" required>{{ old('hightlights') }}</textarea>
+                            placeholder="Enter Highlights">{{ old('hightlights') }}</textarea>
                         </div>
                     </div>
 
+
+
+{{--                    <div class="form-group row">--}}
+{{--                        <label for="name" class="col-md-2 col-form-label">Select Usually Supercars Used</label>--}}
+{{--                        <div class="col-md-10" >--}}
+{{--                            <select name="type"--}}
+{{--                            class="multiselect"--}}
+{{--                            data-coreui-search="true"--}}
+{{--                            required--}}
+{{--                            multiple--}}
+{{--                            style="width:100%;"--}}
+{{--                            x-on:change="supercars_used = $event.target.value">--}}
+{{--                            @foreach($cars as $key=>$car)--}}
+{{--                                <option value="{{$car->id}}">{{$car->title}}</option>--}}
+{{--                            @endforeach--}}
+{{--                            </select>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+                    <!--form-group-->
 
 
                     <div class="form-group row">
-                        <label for="name" class="col-md-2 col-form-label">Select Usually Supercars Used</label>
-                        <div class="col-md-10" >
-                            <select name="type" 
-                            class="multiselect"
-                            data-coreui-search="true"  
-                            required
-                            multiple
-                            style="width:100%;"
-                            x-on:change="supercars_used = $event.target.value">
-                            @foreach($cars as $key=>$car)    
-                                <option value="{{$car->id}}">{{$car->title}}</option>
-                            @endforeach
-                            </select>
-                        </div>
+                        <label for="control" class="col-md-2 col-form-label">Upload Cover Photo</label>
+                        <div class="input_bx"><!-- start input box -->
+                            {{--                            <label class="">Profile Image</label>--}}
+                            <input tabindex="25" type="file" name="image" id="image"
+                                   class="inputs_up form-control"
+                                   accept=".png,.jpg,.jpeg"
+                                   style="width: 100px !important; background-color: #eee; border:none; box-shadow: none !important; display: none;">
+                            <span id="image_error_msg" class="validate_sign"> </span>
+
+                            <div class="db">
+
+                                <div class="db">
+                                    <label id="image1"
+                                           style="display: none; cursor:pointer; color:blue; text-decoration:underline;">
+                                        <i style=" color:#04C1F3"
+                                           class="fa fa-window-close"></i>
+                                    </label>
+                                </div>
+                                <div>
+                                    <img id="imagePreview1"
+                                         style="border-radius:50%; position:relative; cursor:pointer;  width: 100px; height: 100px;"
+                                         src="{{ asset('uploads/cars/default.png') }}"/>
+                                </div>
+                            </div>
+
+
+                        </div><!-- end input box -->
                     </div>
-                    <!--form-group-->
+
 
 
                 </div>
@@ -159,7 +191,93 @@
 
     <script>
 
-var container = document.getElementById('aboutEditor');
+        jQuery("#imagePreview1").click(function () {
+            jQuery("#image").click();
+        });
+        var image1RemoveBtn = document.querySelector("#image1");
+        var imagePreview1 = document.querySelector("#imagePreview1");
+
+
+        $(document).ready(function () {
+            $('#email_confirmation, #email').on("cut copy paste", function (e) {
+                e.preventDefault();
+            });
+
+
+            $('#image').change(function () {
+                var file = this.files[0],
+                    val = $(this).val().trim().toLowerCase();
+                if (!file || $(this).val() === "") {
+                    return;
+                }
+
+                var fileSize = file.size / 1024 / 1024,
+                    regex = new RegExp("(.*?)\.(jpeg|png|jpg)$"),
+                    errors = 0;
+
+                if (fileSize > 200) {
+                    errors = 1;
+
+                    document.getElementById("image_error_msg").innerHTML = "Only png.jpg,jpeg files & max size:200 mb";
+                }
+                if (!(regex.test(val))) {
+                    errors = 1;
+
+                    document.getElementById("image_error_msg").innerHTML = "Only png.jpg,jpegs files & max size:200 mb";
+                }
+
+                var fileInput = document.getElementById('image');
+                var reader = new FileReader();
+
+                if (errors == 1) {
+                    $(this).val('');
+
+                    image1RemoveBtn.style.display = "none";
+                    document.getElementById("imagePreview1").src = 'uploads/cars/default.png';
+
+                } else {
+
+                    image1RemoveBtn.style.display = "block";
+                    imagePreview1.style.display = "block";
+
+                    reader.onload = function (e) {
+                        document.getElementById("imagePreview1").src = e.target.result;
+                    };
+                    reader.readAsDataURL(fileInput.files[0]);
+
+                    document.getElementById("image_error_msg").innerHTML = "";
+                }
+                // document.getElementById("").innerHTML = "";
+            });
+
+            $("#make_salary_account").trigger("change");
+            $("#make_credentials").trigger("change");
+        });
+
+
+        image1RemoveBtn.onclick = function () {
+
+            var image = document.querySelector("#image");
+            image.value = null;
+            var imagea = document.querySelector("#imagePreview1");
+            imagea.value = null;
+            image1RemoveBtn.style.display = "none";
+            //imagePreview1.style.display = "none";
+            document.getElementById("imagePreview1").src = 'uploads/cars/default.png';
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+        var container = document.getElementById('aboutEditor');
 var aboutEditor = new Quill(container,{
   modules: {
     toolbar: [
@@ -185,32 +303,40 @@ aboutEditor.on('text-change', function(delta, source) {
 	document.getElementById("aboutInput").innerHTML=html;
 })
 
-var container = document.getElementById('hightlightsEditor');
-var highlightEditor = new Quill(container,{
-  modules: {
-    toolbar: [
-      [{ header: [1, 2, 3, 4, 5, 6,  false] }],
-      ['bold', 'italic', 'underline','strike'],
-      ['image', 'code-block'],
-      ['link'],
-      [{ 'script': 'sub'}, { 'script': 'super' }],
-      [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-      ['clean']
-    ]
-  },
-  placeholder: 'Compose an epic...',
-  theme: 'snow'  // or 'bubble'
+
+// For Highlights
+var hcontainer = document.getElementById('hightlightsEditor');
+var hightlightsEditor = new Quill(hcontainer,{
+    modules: {
+        toolbar: [
+            [{ header: [1, 2, 3, 4, 5, 6,  false] }],
+            ['bold', 'italic', 'underline','strike'],
+            ['image', 'code-block'],
+            ['link'],
+            [{ 'script': 'sub'}, { 'script': 'super' }],
+            [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+            ['clean']
+        ]
+    },
+    placeholder: 'Compose an epic...',
+    theme: 'snow'  // or 'bubble'
 });
 
 
-highlightEditor.on('text-change', function(delta, source) {
-let html = highlightEditor.root.innerHTML;
-console.log ( html );
-document.getElementById("aboutInput").innerHTML=html;
+
+hightlightsEditor.on('text-change', function(delta, source) {
+
+    let html = hightlightsEditor.root.innerHTML;
+    console.log ( html );
+    document.getElementById("highlightsInput").innerHTML=html;
 })
 
 
+// For Multi select
 $('.multiselect').multipleSelect()
+
+
+
 
     </script>
 @endsection

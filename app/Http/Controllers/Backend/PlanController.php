@@ -41,7 +41,7 @@ class PlanController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-   
+
           ]);
 
           $data= $request->all();
@@ -50,7 +50,7 @@ class PlanController extends Controller
           $plan = Plan::create($data);
 
       return redirect()->route('plans.index')->with('success', 'Plan   has been added Successfully');
-    
+
     }
 
     /**
@@ -71,9 +71,9 @@ class PlanController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
-    { 
+    {
         $plan = Plan::find($id);
-        return view('backend.plans.edit', compact('plan'));
+        return view('backend.plans.edit', compact('plan','id'));
 
     }
 
@@ -90,17 +90,41 @@ class PlanController extends Controller
         'title' => 'required',
 
     ]);
-    
+
     $data = $request->all();
     unset($data['_token']);
     unset($data['_method']);
-  
+
 
     $plan = Plan::where('id', $id)->update($data);
 
     if ($plan) {
         $plan = Plan::find($id);
         $plan->addAllMediaFromTokens();
+        Alert::toast("Plan  Updated Successfully", 'success');
+        return redirect()->route('plans.index');
+    } else {
+        Alert::toast('Fail to update Plan ' , 'error');
+        return redirect()->back();
+    }
+
+    }
+    public function update_plan(Request $request,  $id)
+    {
+        $validator = Validator::make($request->all(), [
+        'title' => 'required',
+    ]);
+
+    $data = $request->all();
+    unset($data['_token']);
+    unset($data['_method']);
+
+
+    $plan = Plan::where('id', $id)->update($data);
+
+    if ($plan) {
+        $plan = Plan::find($id);
+//        $plan->addAllMediaFromTokens();
         Alert::toast("Plan  Updated Successfully", 'success');
         return redirect()->route('plans.index');
     } else {
