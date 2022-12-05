@@ -8,8 +8,10 @@ use App\Http\Controllers\LocaleController;
  * Routes that are used between both frontend and backend.
  */
 Route::get("/process-order","App\Http\Controllers\Backend\FormController@index");
-
 Route::get("/process-order/{tourType}","App\Http\Controllers\Backend\FormController@tour");
+Route::get("/checkout","App\Http\Controllers\Backend\FormController@checkout");
+Route::post("/stripe-session","App\Http\Controllers\Backend\FormController@initializeStripe");
+Route::get("/payment-success","App\Http\Controllers\Backend\FormController@stripeSuccess");
 
 // Switch between the included languages
 Route::get('lang/{lang}', [LocaleController::class, 'change'])->name('locale.change');
