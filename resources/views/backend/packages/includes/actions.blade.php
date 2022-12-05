@@ -1,4 +1,4 @@
 
-    <x-utils.edit-button :href="route('admin.auth.role.edit', $model)" />
-    <x-utils.delete-button :href="route('admin.auth.role.destroy', $model)" />
+    <x-utils.edit-button :href="route('packages.edit', $model)" />
+    <x-utils.delete-button :href="route('packages.destroy', $model)" />
 

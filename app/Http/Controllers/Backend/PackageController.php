@@ -17,8 +17,6 @@ class PackageController extends Controller
      */
     public function index()
     {
-
-
         return view('backend.packages.index');
     }
 
@@ -29,11 +27,9 @@ class PackageController extends Controller
      */
     public function create()
     {
-
         $cars=Car::get();
         return view('backend.packages.create')
                 ->with(["cars"=>$cars]);
-
     }
 
     /**
@@ -45,21 +41,26 @@ class PackageController extends Controller
     public function store(Request $request)
     {
 
+//        dd($request->all());
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-   
           ]);
 
           $data= $request->all();
           unset($data['_token']);
 
-          $package = Package::create($data);
+        $filename = "default.png";
+        if ($request->hasFile('image')){
+            $file = $request->file("image");
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('uploads/cars/',$filename);
+        }
+        $package = Package::create($data);
+        $package->image = $filename;
+        $package->save();
 
       return redirect()->route('packages.index')->with('success', 'Package  has been added Successfully');
-
-
-
-
     }
 
     /**
@@ -82,8 +83,8 @@ class PackageController extends Controller
     public function edit($id)
     {
         $package = Package::findorfail($id);
-
-        return view('backend.packages.edit', compact('package'));
+        $cars=Car::get();
+        return view('backend.packages.edit', compact('package','id','cars'));
     }
 
     /**
@@ -99,17 +100,49 @@ class PackageController extends Controller
             'title' => 'required',
 
         ]);
-        
+
         $data = $request->all();
         unset($data['_token']);
         unset($data['_method']);
-      
+
 
         $package = Package::where('id', $id)->update($data);
 
         if ($package) {
             $package = Package::find($id);
             $package->addAllMediaFromTokens();
+            Alert::toast("Package Updated Successfully", 'success');
+            return redirect()->route('packages.index');
+        } else {
+            Alert::toast('Fail to update Package', 'error');
+            return redirect()->back();
+        }
+    }
+    public function update_package(Request $request, $id)
+    {
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+        ]);
+
+        $data = $request->all();
+        unset($data['_token']);
+        unset($data['_method']);
+
+
+        $filename = "default.png";
+        if ($request->hasFile('image')){
+            $file = $request->file("image");
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('uploads/cars/',$filename);
+        }
+        $package = Package::where('id', $id)->update($data);
+
+        if ($package) {
+            $package = Package::find($id);
+            $package->image = $filename;
+            $package->save();
+
             Alert::toast("Package Updated Successfully", 'success');
             return redirect()->route('packages.index');
         } else {

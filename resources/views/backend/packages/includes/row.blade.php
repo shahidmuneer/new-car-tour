@@ -52,5 +52,5 @@
 
 
 <x-livewire-tables::bs4.table.cell>
-    @include('backend.plans.includes.actions', ['model' => $row])
+    @include('backend.packages.includes.actions', ['model' => $row])
 </x-livewire-tables::bs4.table.cell>

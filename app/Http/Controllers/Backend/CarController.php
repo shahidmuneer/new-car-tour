@@ -20,7 +20,6 @@ class CarController extends Controller
     public function index()
     {
         return view('backend.cars.index');
-
     }
 
     /**
@@ -30,12 +29,10 @@ class CarController extends Controller
      */
     public function create()
     {
-
         $modals=\App\Models\Modal::get();
         return view('backend.cars.create')->with([
             "modals"=>$modals
         ]);
-
     }
 
     /**
@@ -48,18 +45,24 @@ class CarController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'title' => 'required',
-   
           ]);
 
           $data= $request->all();
           unset($data['_token']);
 
+        $filename = "default.png";
+        if ($request->hasFile('image')){
+            $file = $request->file("image");
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('uploads/cars/',$filename);
+        }
           $car = Car::create($data);
+          $car->image = $filename;
+          $car->save();
+
 
       return redirect()->route('cars.index')->with('success', 'Car  has been added Successfully');
-
-
-
     }
 
     /**
@@ -82,8 +85,8 @@ class CarController extends Controller
     public function edit($id)
     {
         $car = Car::findorfail($id);
-
-        return view('backend.cars.edit', compact('car'));
+        $modals=\App\Models\Modal::get();
+        return view('backend.cars.edit', compact('car','modals','id'));
     }
 
     /**
@@ -95,17 +98,17 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-     
-        
+
+
         $validator = Validator::make($request->all(), [
             'title' => 'required',
 
         ]);
-        
+
         $data = $request->all();
         unset($data['_token']);
         unset($data['_method']);
-      
+
 
         $car = Car::where('id', $id)->update($data);
 
@@ -119,7 +122,44 @@ class CarController extends Controller
             return redirect()->back();
         }
     }
-    
+    public function update_cars(Request $request, $id)
+    {
+
+
+        $validator = Validator::make($request->all(), [
+            'title' => 'required',
+        ]);
+
+        $data = $request->all();
+        unset($data['_token']);
+        unset($data['_method']);
+
+
+
+
+        $filename = "default.png";
+        if ($request->hasFile('image')){
+            $file = $request->file("image");
+            $extension = $file->getClientOriginalExtension();
+            $filename = time() . "." . $extension;
+            $file->move('uploads/cars/',$filename);
+        }
+        $car = Car::where('id', $id)->update($data);
+
+
+
+        if ($car) {
+            $car = Car::find($id);
+            $car->image = $filename;
+            $car->save();
+            Alert::toast("Car Updated Successfully", 'success');
+            return redirect()->route('cars.index');
+        } else {
+            Alert::toast('Fail to update daily sitrep', 'error');
+            return redirect()->back();
+        }
+    }
+
 
     /**
      * Remove the specified resource from storage.
@@ -134,7 +174,7 @@ class CarController extends Controller
             Alert::toast("cars Deleted Successfully", 'success');
             return redirect()->route('cars.index');
         } else {
-            Alert::toast('Fail to delete daily sitrep', 'error');
+            Alert::toast('Fail to delete car', 'error');
             return redirect()->back();
         }
     }
